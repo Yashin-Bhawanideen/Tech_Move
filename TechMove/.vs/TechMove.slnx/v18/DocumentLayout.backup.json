@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311 (enterprise)\\TechMoveLogistics\\TechMove\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B3032C36-E029-4E36-9C84-5F986B40A051}|TechMove.API.IntegrationTests\\TechMove.API.IntegrationTests.csproj|c:\\users\\yashi\\onedrive\\documents\\modules\\year 3\\semester 1\\prog7311 (enterprise)\\techmovelogistics\\techmove\\techmove.api.integrationtests\\customwebapplicationfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B3032C36-E029-4E36-9C84-5F986B40A051}|TechMove.API.IntegrationTests\\TechMove.API.IntegrationTests.csproj|solutionrelative:techmove.api.integrationtests\\customwebapplicationfactory.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CustomWebApplicationFactory.cs",
+              "DocumentMoniker": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311 (enterprise)\\TechMoveLogistics\\TechMove\\TechMove.API.IntegrationTests\\CustomWebApplicationFactory.cs",
+              "RelativeDocumentMoniker": "TechMove.API.IntegrationTests\\CustomWebApplicationFactory.cs",
+              "ToolTip": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311 (enterprise)\\TechMoveLogistics\\TechMove\\TechMove.API.IntegrationTests\\CustomWebApplicationFactory.cs",
+              "RelativeToolTip": "TechMove.API.IntegrationTests\\CustomWebApplicationFactory.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-28T11:41:17.431Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

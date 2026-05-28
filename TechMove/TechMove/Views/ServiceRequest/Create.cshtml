@@ -1,0 +1,150 @@
+﻿@model TechMove.ViewModel.ServiceRequestViewModel
+
+@{
+    ViewData["Title"] = "Create Service Request";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4><i class="fas fa-plus-circle"></i> Create Service Request</h4>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-info mb-3">
+                    <i class="fas fa-info-circle"></i>
+                    Current Exchange Rate: <strong id="currentRate">Loading...</strong>
+                </div>
+
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="mb-3">
+                        <label asp-for="ContractId" class="form-label">Contract</label>
+                        <select asp-for="ContractId" class="form-control" asp-items="ViewBag.Contracts">
+                            <option value="">-- Select Active Contract --</option>
+                        </select>
+                        <span asp-validation-for="ContractId" class="text-danger"></span>
+                        <small class="form-text text-muted">Only active contracts are shown</small>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="RequestTitle" class="form-label">Request Title</label>
+                        <input asp-for="RequestTitle" class="form-control" />
+                        <span asp-validation-for="RequestTitle" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label">Description</label>
+                        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="AmountUSD" class="form-label">Amount (USD)</label>
+                        <div class="input-group">
+                            <span class="input-group-text">$</span>
+                            <input asp-for="AmountUSD" class="form-control" id="AmountUSD" />
+                        </div>
+                        <span asp-validation-for="AmountUSD" class="text-danger"></span>
+                        <div class="mt-2 p-2 bg-light rounded">
+                            <strong>Amount in ZAR: <span id="AmountZAR">0.00</span> R</strong>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Create Request
+                        </button>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left"></i> Back to List
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card bg-light">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-info-circle"></i> Information
+                </h5>
+                <hr />
+                <p class="card-text small">
+                    <strong>Note:</strong> Service requests can only be created for active contracts.
+                    The system will automatically convert USD to ZAR using the current exchange rate.
+                </p>
+                <p class="card-text small text-muted">
+                    <i class="fas fa-check-circle text-success"></i> Exchange rate updates every hour
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    
+    <script>
+        $(document).ready(function() {
+            loadExchangeRate();
+            
+            $('#AmountUSD').on('input', function() {
+                convertCurrency();
+            });
+        });
+        
+        function loadExchangeRate() {
+            $.ajax({
+                url: '@Url.Action("GetExchangeRate", "ServiceRequest")',
+                type: 'GET',
+                success: function(data) {
+                    if (data.success) {
+                        $('#currentRate').text(`1 USD = ${data.rate.toFixed(2)} ZAR`);
+                    } else {
+                        $('#currentRate').text('Unavailable');
+                    }
+                },
+                error: function() {
+                    $('#currentRate').text('Error loading rate');
+                }
+            });
+        }
+        
+        function convertCurrency() {
+            var usdAmount = $('#AmountUSD').val();
+            if (usdAmount && !isNaN(usdAmount) && parseFloat(usdAmount) > 0) {
+                $.ajax({
+                    url: '@Url.Action("ConvertCurrency", "ServiceRequest")',
+                    type: 'GET',
+                    data: { usdAmount: usdAmount },
+                    success: function(data) {
+                        if (data.success) {
+                            $('#AmountZAR').text(data.zar.toFixed(2));
+                        } else {
+                            $('#AmountZAR').text('Error');
+                        }
+                    },
+                    error: function() {
+                        $('#AmountZAR').text('Error');
+                    }
+                });
+            } else {
+                $('#AmountZAR').text('0.00');
+            }
+        }
+    </script>
+}
+@* References
+ahmed, F., 2026. Views In ASP.NET MVC. [Online]
+Available at: https://www.c-sharpcorner.com/article/views-in-asp-net-mvc/
+alex.mironov, 2013. How do you request static .html files under the ~/Views folder in ASP.NET MVC?. [Online]
+Available at: https://stackoverflow.com/questions/17949460/how-do-you-request-static-html-files-under-the-views-folder-in-asp-net-mvc
+Microsoft, 2026. Views in ASP.NET Core MVC. [Online]
+Available at: https://learn.microsoft.com/en-us/aspnet/core/mvc/views/overview?view=aspnetcore-10.0
+w3schools, 2026. HTML Introduction. [Online]
+Available at: https://www.w3schools.com/html/html_intro.asp *@

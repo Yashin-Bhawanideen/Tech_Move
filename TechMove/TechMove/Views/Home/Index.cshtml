@@ -1,0 +1,113 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="display-4">
+                <i class="fas fa-tachometer-alt"></i> Dashboard
+            </h1>
+            <p class="lead">Welcome to the Global Logistics Management System</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3 mb-3">
+            <div class="card card-stats bg-primary text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title">Total Client</h5>
+                            <h2 class="mb-0">@ViewBag.TotalClient</h2>
+                        </div>
+                        <i class="fas fa-users fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card card-stats bg-success text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title">Active Contracts</h5>
+                            <h2 class="mb-0">@ViewBag.ActiveContracts</h2>
+                        </div>
+                        <i class="fas fa-file-signature fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card card-stats bg-warning text-dark">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title">Pending Requests</h5>
+                            <h2 class="mb-0">@ViewBag.PendingRequests</h2>
+                        </div>
+                        <i class="fas fa-clock fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-3">
+            <div class="card card-stats bg-info text-white">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h5 class="card-title">Total Requests</h5>
+                            <h2 class="mb-0">@ViewBag.TotalRequests</h2>
+                        </div>
+                        <i class="fas fa-tasks fa-3x opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Quick Actions</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a asp-controller="Client" asp-action="Create" class="btn btn-outline-primary">
+                            <i class="fas fa-user-plus"></i> Add New Client
+                        </a>
+                        <a asp-controller="Contract" asp-action="Create" class="btn btn-outline-success">
+                            <i class="fas fa-file-contract"></i> Create Contract
+                        </a>
+                        <a asp-controller="ServiceRequest" asp-action="Create" class="btn btn-outline-info">
+                            <i class="fas fa-clipboard-list"></i> New Service Request
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">System Status</h5>
+                </div>
+                <div class="card-body">
+                    <div class="mb-2">
+                        <i class="fas fa-database"></i> Database:
+                        <span class="text-success">Connected</span>
+                    </div>
+                    <div class="mb-2">
+                        <i class="fas fa-exchange-alt"></i> Currency API:
+                        <span class="text-success">Active</span>
+                    </div>
+                    <div class="mb-2">
+                        <i class="fas fa-file-pdf"></i> File Storage:
+                        <span class="text-success">Ready</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

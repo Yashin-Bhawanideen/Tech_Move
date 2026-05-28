@@ -1,0 +1,6 @@
+C:\Users\Yashi\OneDrive\Documents\Modules\year 3\Semester 1\Prog7311 (enterprise)\TechMoveLogistics\TechMove\TechMove.API.IntegrationTests\obj\Debug\net10.0\TechMove.API.IntegrationTests.csproj.AssemblyReference.cache
+C:\Users\Yashi\OneDrive\Documents\Modules\year 3\Semester 1\Prog7311 (enterprise)\TechMoveLogistics\TechMove\TechMove.API.IntegrationTests\obj\Debug\net10.0\MvcTestingAppManifest.json
+C:\Users\Yashi\OneDrive\Documents\Modules\year 3\Semester 1\Prog7311 (enterprise)\TechMoveLogistics\TechMove\TechMove.API.IntegrationTests\obj\Debug\net10.0\TechMove.API.IntegrationTests.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Yashi\OneDrive\Documents\Modules\year 3\Semester 1\Prog7311 (enterprise)\TechMoveLogistics\TechMove\TechMove.API.IntegrationTests\obj\Debug\net10.0\TechMove.API.IntegrationTests.AssemblyInfoInputs.cache
+C:\Users\Yashi\OneDrive\Documents\Modules\year 3\Semester 1\Prog7311 (enterprise)\TechMoveLogistics\TechMove\TechMove.API.IntegrationTests\obj\Debug\net10.0\TechMove.API.IntegrationTests.AssemblyInfo.cs
+C:\Users\Yashi\OneDrive\Documents\Modules\year 3\Semester 1\Prog7311 (enterprise)\TechMoveLogistics\TechMove\TechMove.API.IntegrationTests\obj\Debug\net10.0\TechMove.API.IntegrationTests.csproj.CoreCompileInputs.cache

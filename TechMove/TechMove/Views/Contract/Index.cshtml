@@ -1,0 +1,88 @@
+﻿@model IEnumerable<TechMove.Models.Contract>
+
+@{
+    ViewData["Title"] = "Contracts";
+}
+
+<h1>Contracts</h1>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <form method="get" class="row g-3">
+            <div class="col-md-3">
+                <label for="searchStatus" class="form-label">Status</label>
+                <select name="searchStatus" class="form-select" asp-items="ViewBag.StatusList">
+                    <option value="">All</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="startDate" class="form-label">Start Date From</label>
+                <input type="date" name="startDate" class="form-control" value="@ViewBag.StartDate" />
+            </div>
+            <div class="col-md-3">
+                <label for="endDate" class="form-label">End Date To</label>
+                <input type="date" name="endDate" class="form-control" value="@ViewBag.EndDate" />
+            </div>
+            <div class="col-md-3 d-flex align-items-end">
+                <button type="submit" class="btn btn-primary me-2">Search</button>
+                <a asp-action="Index" class="btn btn-secondary">Clear</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Contract</a>
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Contract Number</th>
+            <th>Client</th>
+            <th>Service Lead</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Signed Agreement</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ContractNumber</td>
+                <td>@item.Client?.Name</td>
+                <td>@item.ServiceLead</td>
+                <td>@item.StartDate.ToString("yyyy-MM-dd")</td>
+                <td>@item.EndDate.ToString("yyyy-MM-dd")</td>
+                <td>
+                    <span class="badge bg-@(item.Status.ToString().ToLower() switch {
+                        "active" => "success",
+                        "expired" => "danger",
+                        "onhold" => "warning",
+                        _ => "secondary"
+                    })">
+                        @item.Status
+                    </span>
+                </td>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.SignedAgreementPath))
+                    {
+                        <a asp-action="DownloadAgreement" asp-route-id="@item.ContractId" class="btn btn-sm btn-info">Download PDF</a>
+                    }
+                    else
+                    {
+                        <span class="text-muted">No file</span>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ContractId" class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@item.ContractId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@item.ContractId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,114 @@
+﻿@model TechMove.Models.Client
+
+@{
+    ViewData["Title"] = "Client Details";
+}
+
+<div class="container-fluid">
+    <div class="row mb-4">
+        <div class="col">
+            <h1>
+                <i class="fas fa-user"></i> Client Details
+            </h1>
+        </div>
+        <div class="col-auto">
+            <a asp-action="Edit" asp-route-id="@Model.ClientId" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header bg-info text-white">
+                    <h5>Client Information</h5>
+                </div>
+                <div class="card-body">
+                    <dl class="row">
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Name)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Name)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Email)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Email)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Phone)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Phone)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Address)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Address)</dd>
+
+                        <dt class="col-sm-4">@Html.DisplayNameFor(model => model.Region)</dt>
+                        <dd class="col-sm-8">@Html.DisplayFor(model => model.Region)</dd>
+
+                        <dt class="col-sm-4">Created Date</dt>
+                        <dd class="col-sm-8">@Model.CreatedAt.ToString("yyyy-MM-dd HH:mm")</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5>Contracts (@Model.Contracts?.Count())</h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Contracts != null && Model.Contracts.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Contract #</th>
+                                        <th>Service Lead</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var contract in Model.Contracts)
+                                    {
+                                        <tr>
+                                            <td>@contract.ContractNumber</td>
+                                            <td>@contract.ServiceLead</td>
+                                            <td>
+                                                <span class="badge bg-@(contract.Status.ToString().ToLower() == "active" ? "success" : "secondary")">
+                                                    @contract.Status
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a asp-controller="Contracts" asp-action="Details" asp-route-id="@contract.ContractId" class="btn btn-sm btn-info">
+                                                    View
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <p class="text-muted">No contracts found for this client.</p>
+                        <a asp-controller="Contracts" asp-action="Create" asp-route-clientId="@Model.ClientId" class="btn btn-sm btn-primary">
+                            Create First Contract
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@* References
+ahmed, F., 2026. Views In ASP.NET MVC. [Online]
+Available at: https://www.c-sharpcorner.com/article/views-in-asp-net-mvc/
+alex.mironov, 2013. How do you request static .html files under the ~/Views folder in ASP.NET MVC?. [Online]
+Available at: https://stackoverflow.com/questions/17949460/how-do-you-request-static-html-files-under-the-views-folder-in-asp-net-mvc
+Microsoft, 2026. Views in ASP.NET Core MVC. [Online]
+Available at: https://learn.microsoft.com/en-us/aspnet/core/mvc/views/overview?view=aspnetcore-10.0
+w3schools, 2026. HTML Introduction. [Online]
+Available at: https://www.w3schools.com/html/html_intro.asp *@
