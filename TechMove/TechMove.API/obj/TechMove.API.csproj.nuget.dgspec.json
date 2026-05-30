@@ -69,6 +69,10 @@
               "target": "Package",
               "version": "[10.0.8, )"
             },
+            "Microsoft.EntityFrameworkCore.InMemory": {
+              "target": "Package",
+              "version": "[10.0.8, )"
+            },
             "Microsoft.IdentityModel.Tokens": {
               "target": "Package",
               "version": "[8.18.0, )"
@@ -591,6 +595,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[10.0.6, )"
+            },
+            "Microsoft.VisualStudio.Azure.Containers.Tools.Targets": {
+              "target": "Package",
+              "version": "[1.23.0, )"
             }
           },
           "imports": [

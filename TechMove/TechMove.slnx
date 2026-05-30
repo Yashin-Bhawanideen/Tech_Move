@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="TechMove.API.IntegrationTests/TechMove.API.IntegrationTests.csproj" Id="b3032c36-e029-4e36-9c84-5f986b40a051" />
+  <Project Path="TechMove.API.IntegrationTests/TechMove.API.IntegrationTests.csproj" Id="32d33f6b-5426-4744-9703-d617678d57c0" />
   <Project Path="TechMove.API/TechMove.API.csproj" Id="adc19bf5-0721-44fd-b49d-d0e23412d605" />
   <Project Path="TechMove.Tests/TechMove.Tests.csproj" Id="3501fd64-d7b9-4a98-b3ba-ee5849715919" />
   <Project Path="TechMove/TechMove.csproj" />

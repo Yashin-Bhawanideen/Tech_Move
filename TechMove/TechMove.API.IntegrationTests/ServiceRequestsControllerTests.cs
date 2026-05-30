@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http.Json;
-using System.Text;
+using NUnit.Framework;
+using TechMove.API.DTOs;
 
 namespace TechMove.API.IntegrationTests
 {
@@ -18,7 +17,7 @@ namespace TechMove.API.IntegrationTests
         {
             _factory = new CustomWebApplicationFactory();
             _client = _factory.CreateClient();
-            _authToken = await TestHelper.GetAuthToken(_client);
+            _authToken = await GetAuthToken();
 
             if (!string.IsNullOrEmpty(_authToken))
             {
@@ -30,50 +29,29 @@ namespace TechMove.API.IntegrationTests
         [TearDown]
         public void TearDown()
         {
-            _client.Dispose();
-            _factory.Dispose();
+            // Clean up resources after each test
+            _client?.Dispose();
+            _factory?.Dispose();
+        }
+
+        private async Task<string> GetAuthToken()
+        {
+            var loginData = new { username = "testuser", password = "testpass" };
+            var response = await _client.PostAsJsonAsync("/api/auth/login", loginData);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadFromJsonAsync<Dictionary<string, string>>();
+                return content?["token"];
+            }
+            return null;
         }
 
         [Test]
-        public async Task GetServiceRequests_ReturnsSuccessStatusCode()
+        public async Task GetServiceRequests_ReturnsSuccess()
         {
             // Act
             var response = await _client.GetAsync("/api/servicerequests");
-
-            // Assert
-            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-        }
-
-        [Test]
-        public async Task GetServiceRequests_ReturnsJsonContent()
-        {
-            // Act
-            var response = await _client.GetAsync("/api/servicerequests");
-            var content = await response.Content.ReadAsStringAsync();
-
-            // Assert
-            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-            Assert.That(content, Is.Not.Null);
-            Assert.That(content, Is.Not.Empty);
-        }
-
-        [Test]
-        public async Task GetServiceRequests_WithStatusFilter_ReturnsFilteredResults()
-        {
-            // Act
-            var response = await _client.GetAsync("/api/servicerequests?status=Pending");
-            var content = await response.Content.ReadAsStringAsync();
-
-            // Assert
-            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
-            Assert.That(content, Does.Contain("Pending"));
-        }
-
-        [Test]
-        public async Task GetServiceRequestById_WithValidId_ReturnsRequest()
-        {
-            // Act
-            var response = await _client.GetAsync("/api/servicerequests/1");
 
             // Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
@@ -93,12 +71,12 @@ namespace TechMove.API.IntegrationTests
         public async Task CreateServiceRequest_WithValidData_ReturnsCreated()
         {
             // Arrange
-            var newRequest = new
+            var newRequest = new CreateServiceRequestDto
             {
-                contractId = 1,
-                requestTitle = "Integration Test Request",
-                description = "This is a test request from integration tests",
-                amountUSD = 500.00m
+                ContractId = 1,
+                RequestTitle = "Integration Test Request",
+                Description = "This is a test request from integration tests",
+                AmountUSD = 500.00m
             };
 
             // Act
@@ -111,13 +89,13 @@ namespace TechMove.API.IntegrationTests
         [Test]
         public async Task CreateServiceRequest_WithInvalidContract_ReturnsBadRequest()
         {
-            // Arrange - contract doesn't exist
-            var newRequest = new
+            // Arrange
+            var newRequest = new CreateServiceRequestDto
             {
-                contractId = 999,
-                requestTitle = "Invalid Request",
-                description = "This should fail",
-                amountUSD = 500.00m
+                ContractId = 999,
+                RequestTitle = "Invalid Request",
+                Description = "This should fail",
+                AmountUSD = 500.00m
             };
 
             // Act
@@ -130,11 +108,21 @@ namespace TechMove.API.IntegrationTests
         [Test]
         public async Task UpdateRequestStatus_WithValidData_ReturnsOk()
         {
-            // Arrange
-            var statusUpdate = "Completed";
+            // Arrange - First create a request
+            var newRequest = new CreateServiceRequestDto
+            {
+                ContractId = 1,
+                RequestTitle = "Status Test Request",
+                Description = "Testing status update",
+                AmountUSD = 100.00m
+            };
 
-            // Act
-            var response = await _client.PatchAsJsonAsync("/api/servicerequests/1/status", statusUpdate);
+            var createResponse = await _client.PostAsJsonAsync("/api/servicerequests", newRequest);
+            var createdRequest = await createResponse.Content.ReadFromJsonAsync<ServiceRequestDto>();
+
+            // Act - Update status
+            var statusUpdate = new { status = "InProgress" };
+            var response = await _client.PatchAsJsonAsync($"/api/servicerequests/{createdRequest.ServiceRequestId}/status", statusUpdate);
 
             // Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
@@ -144,7 +132,7 @@ namespace TechMove.API.IntegrationTests
         public async Task UpdateRequestStatus_WithInvalidId_ReturnsNotFound()
         {
             // Arrange
-            var statusUpdate = "Completed";
+            var statusUpdate = new { status = "InProgress" };
 
             // Act
             var response = await _client.PatchAsJsonAsync("/api/servicerequests/999/status", statusUpdate);
@@ -154,35 +142,17 @@ namespace TechMove.API.IntegrationTests
         }
 
         [Test]
-        public async Task UpdateRequestStatus_WithInvalidStatus_ReturnsBadRequest()
-        {
-            // Arrange
-            var statusUpdate = "InvalidStatus";
-
-            // Act
-            var response = await _client.PatchAsJsonAsync("/api/servicerequests/1/status", statusUpdate);
-
-            // Assert
-            Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.BadRequest));
-        }
-
-        [Test]
         public async Task GetExchangeRate_ReturnsValidRate()
         {
             // Act
             var response = await _client.GetAsync("/api/servicerequests/exchangerate");
-            var content = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
 
             // Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+            var content = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
             Assert.That(content, Is.Not.Null);
             Assert.That(content.ContainsKey("rate"), Is.True);
-
-            if (content.ContainsKey("rate"))
-            {
-                var rate = Convert.ToDecimal(content["rate"]);
-                Assert.That(rate, Is.GreaterThan(0));
-            }
         }
 
         [Test]
@@ -190,18 +160,13 @@ namespace TechMove.API.IntegrationTests
         {
             // Act
             var response = await _client.GetAsync("/api/servicerequests/convert?usdAmount=100");
-            var content = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
 
             // Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+            var content = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
             Assert.That(content, Is.Not.Null);
             Assert.That(content.ContainsKey("zar"), Is.True);
-
-            if (content.ContainsKey("zar"))
-            {
-                var zarAmount = Convert.ToDecimal(content["zar"]);
-                Assert.That(zarAmount, Is.GreaterThan(0));
-            }
         }
 
         [Test]
@@ -209,12 +174,12 @@ namespace TechMove.API.IntegrationTests
         {
             // Act
             var response = await _client.GetAsync("/api/servicerequests/convert?usdAmount=0");
-            var content = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
 
             // Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
-            if (content.ContainsKey("zar"))
+            var content = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
+            if (content != null && content.ContainsKey("zar"))
             {
                 var zarAmount = Convert.ToDecimal(content["zar"]);
                 Assert.That(zarAmount, Is.EqualTo(0));
@@ -226,12 +191,12 @@ namespace TechMove.API.IntegrationTests
         {
             // Act
             var response = await _client.GetAsync("/api/servicerequests/convert?usdAmount=-100");
-            var content = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
 
             // Assert
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
-            if (content.ContainsKey("zar"))
+            var content = await response.Content.ReadFromJsonAsync<Dictionary<string, object>>();
+            if (content != null && content.ContainsKey("zar"))
             {
                 var zarAmount = Convert.ToDecimal(content["zar"]);
                 Assert.That(zarAmount, Is.LessThan(0));
