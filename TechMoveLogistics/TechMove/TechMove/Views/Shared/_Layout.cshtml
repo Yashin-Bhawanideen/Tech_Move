@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - TechMove Logistics</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TechMove.styles.css" asp-append-version="true" />
+    
+    <style>
+            /* Custom styles */
+            .navbar-brand {
+                font-weight: bold;
+                font-size: 1.5rem;
+            }
+        
+            .navbar-brand i {
+                margin-right: 8px;
+            }
+        
+            .nav-link {
+                transition: all 0.3s ease;
+            }
+        
+            .nav-link:hover {
+                transform: translateY(-2px);
+                opacity: 0.8;
+            }
+        
+            .footer {
+                background-color: #343a40;
+                color: white;
+                padding: 20px 0;
+                margin-top: 40px;
+                position: relative;
+                bottom: 0;
+                width: 100%;
+            }
+        
+            .footer a {
+                color: #ffc107;
+                text-decoration: none;
+            }
+        
+            .footer a:hover {
+                text-decoration: underline;
+            }
+        
+            /* Alert animations */
+            .alert {
+                animation: slideDown 0.5s ease-out;
+            }
+        
+            @@keyframes slideDown {
+                from {
+                    transform: translateY(-100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+        
+            /* Loading spinner */
+            .loading-spinner {
+                display: inline-block;
+                width: 20px;
+                height: 20px;
+                border: 3px solid rgba(0,0,0,.1);
+                border-radius: 50%;
+                border-top-color: #007bff;
+                animation: spin 1s ease-in-out infinite;
+            }
+        
+            @@keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+        
+            /* Active navigation link */
+            .nav-link.active {
+                font-weight: bold;
+                background-color: rgba(255,255,255,0.1);
+                border-radius: 5px;
+            }
+        
+            /* Responsive adjustments */
+            @@media (max-width: 768px) {
+                .navbar-brand {
+                    font-size: 1.2rem;
+                }
+            }
+    </style>
+</head>
+
+<body>
+    
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3 shadow-sm">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                    <i class="fas fa-truck-moving"></i>
+                    TechMove Logistics
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-light @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Home" ? "active" : "")"
+                                   asp-controller="Home" asp-action="Index">
+                                <i class="fas fa-home"></i> Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-light @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Client" ? "active" : "")"
+                                   asp-controller="Client" asp-action="Index">
+                                <i class="fas fa-users"></i> Clients
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-light @(ViewContext.RouteData.Values["Controller"]?.ToString() == "Contract" ? "active" : "")"
+                                   asp-controller="Contract" asp-action="Index">
+                                <i class="fas fa-file-signature"></i> Contracts
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-light @(ViewContext.RouteData.Values["Controller"]?.ToString() == "ServiceRequest" ? "active" : "")"
+                                   asp-controller="ServiceRequest" asp-action="Index">
+                                <i class="fas fa-clipboard-list"></i> Service Requests
+                            </a>
+                        </li>
+                    </ul>
+                    
+                    <!-- Exchange Rate Display (Optional) -->
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-light" href="#" id="exchangeRateLink">
+                                <i class="fas fa-exchange-alt"></i>
+                                <span id="exchangeRateDisplay">USD/ZAR Loading...</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    
+    <div class="container">
+        <main role="main" class="pb-3">
+            <!-- Success Message -->
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    <i class="fas fa-check-circle"></i> @TempData["Success"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            
+            <!-- Error Message -->
+            @if (TempData["Error"] != null)
+            {
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-circle"></i> @TempData["Error"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            
+            <!-- Warning Message -->
+            @if (TempData["Warning"] != null)
+            {
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i> @TempData["Warning"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+            
+            <!-- Info Message -->
+            @if (TempData["Info"] != null)
+            {
+                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                    <i class="fas fa-info-circle"></i> @TempData["Info"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            @RenderBody()
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <i class="fas fa-copyright"></i> 2024 - TechMove Logistics Management System | Version 1.0
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a asp-controller="Home" asp-action="Privacy">
+                        <i class="fas fa-lock"></i> Privacy Policy
+                    </a>
+                    <span class="mx-2 text-white-50">|</span>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#aboutModal">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-dark text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-info-circle"></i> About TechMove
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <h6>Global Logistics Management System (GLMS)</h6>
+                    <p>Version 1.0.0</p>
+                    <hr />
+                    <p>This system provides:</p>
+                    <ul>
+                        <li><i class="fas fa-users text-primary"></i> Client Management</li>
+                        <li><i class="fas fa-file-signature text-success"></i> Contract Management</li>
+                        <li><i class="fas fa-clipboard-list text-info"></i> Service Request Processing</li>
+                        <li><i class="fas fa-chart-line text-warning"></i> Financial Integration with Currency Conversion</li>
+                        <li><i class="fas fa-file-pdf text-danger"></i> PDF Document Management</li>
+                    </ul>
+                    <hr />
+                    <p class="text-muted small">
+                        Built with ASP.NET Core 8.0, Entity Framework Core, and Bootstrap 5
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script>
+            // Auto-hide alerts after 5 seconds
+            $(document).ready(function() {
+                setTimeout(function() {
+                    $(".alert").fadeOut("slow", function() {
+                        $(this).remove();
+                    });
+                }, 5000);
+            
+                // Load exchange rate (if API is available)
+                loadExchangeRate();
+            });
+        
+            function loadExchangeRate() {
+                $.ajax({
+                    url: 'https://api.exchangerate-api.com/v4/latest/USD',
+                    type: 'GET',
+                    success: function(data) {
+                        if (data && data.rates && data.rates.ZAR) {
+                            $('#exchangeRateDisplay').html(`1 USD = ${data.rates.ZAR.toFixed(2)} ZAR`);
+                        } else {
+                            $('#exchangeRateDisplay').html('Rate unavailable');
+                        }
+                    },
+                    error: function() {
+                        $('#exchangeRateDisplay').html('Rate unavailable');
+                    }
+                });
+            }
+        
+            // Add active class to current navigation item
+            $(document).ready(function() {
+                var currentUrl = window.location.pathname.toLowerCase();
+                $('.nav-link').each(function() {
+                    var linkUrl = $(this).attr('href');
+                    if (linkUrl && linkUrl !== '#' && currentUrl.includes(linkUrl.toLowerCase())) {
+                        $(this).addClass('active');
+                    }
+                });
+            });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,11 @@
+**/bin/
+**/obj/
+**/TechMove.Tests/
+**/TechMove.API.IntegrationTests/
+**/*.Tests/
+**/*.IntegrationTests/
+*.user
+*.suo
+.vs/
+.git/
+.gitignore

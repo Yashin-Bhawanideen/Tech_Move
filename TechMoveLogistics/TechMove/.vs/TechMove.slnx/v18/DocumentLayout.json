@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311\\TechMoveLogistics\\TechMove\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{518D87AB-9597-10C9-F1AD-8E982B27C541}|TechMove\\TechMove.csproj|c:\\users\\yashi\\onedrive\\documents\\modules\\year 3\\semester 1\\prog7311\\techmovelogistics\\techmove\\techmove\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{518D87AB-9597-10C9-F1AD-8E982B27C541}|TechMove\\TechMove.csproj|solutionrelative:techmove\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ADC19BF5-0721-44FD-B49D-D0E23412D605}|TechMove.API\\TechMove.API.csproj|c:\\users\\yashi\\onedrive\\documents\\modules\\year 3\\semester 1\\prog7311\\techmovelogistics\\techmove\\techmove.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{ADC19BF5-0721-44FD-B49D-D0E23412D605}|TechMove.API\\TechMove.API.csproj|solutionrelative:techmove.api\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{518D87AB-9597-10C9-F1AD-8E982B27C541}|TechMove\\TechMove.csproj|c:\\users\\yashi\\onedrive\\documents\\modules\\year 3\\semester 1\\prog7311\\techmovelogistics\\techmove\\techmove\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{518D87AB-9597-10C9-F1AD-8E982B27C541}|TechMove\\TechMove.csproj|solutionrelative:techmove\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{ADC19BF5-0721-44FD-B49D-D0E23412D605}|TechMove.API\\TechMove.API.csproj|c:\\users\\yashi\\onedrive\\documents\\modules\\year 3\\semester 1\\prog7311\\techmovelogistics\\techmove\\techmove.api\\techmove.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{ADC19BF5-0721-44FD-B49D-D0E23412D605}|TechMove.API\\TechMove.API.csproj|solutionrelative:techmove.api\\techmove.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{518D87AB-9597-10C9-F1AD-8E982B27C541}|TechMove\\TechMove.csproj|c:\\users\\yashi\\onedrive\\documents\\modules\\year 3\\semester 1\\prog7311\\techmovelogistics\\techmove\\techmove\\techmove.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{518D87AB-9597-10C9-F1AD-8E982B27C541}|TechMove\\TechMove.csproj|solutionrelative:techmove\\techmove.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311\\TechMoveLogistics\\TechMove\\TechMove\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "TechMove\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311\\TechMoveLogistics\\TechMove\\TechMove\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "TechMove\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-01T10:09:23.042Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311\\TechMoveLogistics\\TechMove\\TechMove.API\\Dockerfile",
+              "RelativeDocumentMoniker": "TechMove.API\\Dockerfile",
+              "ToolTip": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311\\TechMoveLogistics\\TechMove\\TechMove.API\\Dockerfile",
+              "RelativeToolTip": "TechMove.API\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-01T10:09:10.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311\\TechMoveLogistics\\TechMove\\TechMove\\Dockerfile",
+              "RelativeDocumentMoniker": "TechMove\\Dockerfile",
+              "ToolTip": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311\\TechMoveLogistics\\TechMove\\TechMove\\Dockerfile",
+              "RelativeToolTip": "TechMove\\Dockerfile",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-01T10:09:01.264Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "TechMove.API",
+              "DocumentMoniker": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311\\TechMoveLogistics\\TechMove\\TechMove.API\\TechMove.API.csproj",
+              "RelativeDocumentMoniker": "TechMove.API\\TechMove.API.csproj",
+              "ToolTip": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311\\TechMoveLogistics\\TechMove\\TechMove.API\\TechMove.API.csproj",
+              "RelativeToolTip": "TechMove.API\\TechMove.API.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-06-01T10:05:58.115Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TechMove",
+              "DocumentMoniker": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311\\TechMoveLogistics\\TechMove\\TechMove\\TechMove.csproj",
+              "RelativeDocumentMoniker": "TechMove\\TechMove.csproj",
+              "ToolTip": "C:\\Users\\Yashi\\OneDrive\\Documents\\Modules\\year 3\\Semester 1\\Prog7311\\TechMoveLogistics\\TechMove\\TechMove\\TechMove.csproj",
+              "RelativeToolTip": "TechMove\\TechMove.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-06-01T10:02:03.365Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
